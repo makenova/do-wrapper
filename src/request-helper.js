@@ -1,6 +1,6 @@
 'use strict';
 
-import request from 'request';
+import got from 'got';
 
 export default class RequestHelper {
   /**
@@ -46,15 +46,9 @@ export default class RequestHelper {
    */
   submitRequest(options, callback) {
     let requestOptions = this.requestBuilder(options);
-    request(requestOptions, (err, response, body) => {
-      if ( err ) {
-        callback(err);
-      } else if ( !err && !this.isSuccessfulRequest(response.statusCode) ) {
-        callback(body);
-      } else {
-        callback(null, response, body);
-      }
-    });
+    got(requestOptions.uri, requestOptions)
+      .then(response => callback(null, response, response.body) )
+      .catch(err => callback(err) );
   }
 
   /**
@@ -129,10 +123,7 @@ export default class RequestHelper {
       uri: this.apiUrl + options.actionPath,
       method: options.method || 'GET',
       headers: options.headers || this.headers,
-      body: options.body || {},
-      strictSSL: true,
-      json: true,
-      qs: options.qs || {}
+      body: options.body || {}
     };
   }
 }

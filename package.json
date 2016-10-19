@@ -13,8 +13,8 @@
   "scripts": {
     "build": "gulp compile && npm run doc",
     "precommit": "npm t",
-    "test": "jshint src/*.js && ./node_modules/mocha/bin/mocha",
-    "doc": "./node_modules/.bin/jsdoc src/*.js -d doc/"
+    "test": "jshint src/*.js && mocha",
+    "doc": "jsdoc src/*.js -d doc/"
   },
   "license": "MIT",
   "bugs": {
@@ -31,7 +31,7 @@
     "es6"
   ],
   "dependencies": {
-    "request": "2.74.0"
+    "got": "^6.5.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
