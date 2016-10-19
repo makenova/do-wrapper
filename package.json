@@ -31,7 +31,7 @@
     "es6"
   ],
   "dependencies": {
-    "got": "^6.5.0"
+    "axios": "^0.15.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",

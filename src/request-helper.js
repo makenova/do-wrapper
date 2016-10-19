@@ -1,6 +1,6 @@
 'use strict';
 
-import got from 'got';
+import axios from 'axios';
 
 export default class RequestHelper {
   /**
@@ -46,8 +46,8 @@ export default class RequestHelper {
    */
   submitRequest(options, callback) {
     let requestOptions = this.requestBuilder(options);
-    got(requestOptions.uri, requestOptions)
-      .then(response => callback(null, response, response.body) )
+    axios(requestOptions.url, requestOptions)
+      .then(response => callback(null, response, response.data) )
       .catch(err => callback(err) );
   }
 
@@ -120,10 +120,10 @@ export default class RequestHelper {
    */
   requestBuilder(options) {
     return {
-      uri: this.apiUrl + options.actionPath,
+      url: this.apiUrl + options.actionPath,
       method: options.method || 'GET',
       headers: options.headers || this.headers,
-      body: options.body || {}
+      data: options.body || {}
     };
   }
 }
