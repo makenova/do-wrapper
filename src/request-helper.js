@@ -123,7 +123,8 @@ export default class RequestHelper {
       url: this.apiUrl + options.actionPath,
       method: options.method || 'GET',
       headers: options.headers || this.headers,
-      data: options.body || {}
+      data: options.body || {},
+      params: options.qs || {}
     };
   }
 }
